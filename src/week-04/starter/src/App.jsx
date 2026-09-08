@@ -4,6 +4,8 @@
 // Read it and notice how much of it repeats: every card has the same shape and
 // only the words inside it change. During the guided build we will give that
 // repeated shape a name of its own.
+import {SiteHeader} from "./components/header";
+import {FilmCard} from "./components/FilmCard";
 
 function App() {
   return (
