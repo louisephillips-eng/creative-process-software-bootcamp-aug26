@@ -121,6 +121,19 @@ Complete and Showcase are published after the guided build. The expanded
 archive is project data: choose one relevant entry point rather than trying to
 use every file.
 
+## Week 7 Materials
+
+- [Week 7 slides](docs/weeks/week-07/slides.md)
+- [Week 7 worksheet](docs/weeks/week-07/worksheet.md)
+- [Week 7 resources](docs/weeks/week-07/resources.md)
+- [Week 7 Showcase](src/week-07/showcase/README.md)
+
+Week 7 is a project-build day focused on debugging, simplification and a stable
+prototype. There is no Starter or Complete application because you are working
+on your own project rather than following a new guided build. The Showcase is
+optional reference material: inspect one relevant pattern at a time rather than
+treating its features as a checklist.
+
 ## Your Individual Repository
 
 This cohort repository contains shared course material. Your prototype belongs
