@@ -189,7 +189,6 @@ causes an endless loop of requests.
 
 A working version is in `src/week-05/showcase`, including what the page shows
 while loading and when the request fails.
-
 - [React: `useEffect`](https://react.dev/reference/react/useEffect)
 - [React: Synchronising with effects](https://react.dev/learn/synchronizing-with-effects)
 - [MDN: Using the Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
