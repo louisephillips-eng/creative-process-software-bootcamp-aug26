@@ -9,93 +9,167 @@ import films  from "./data/films.json";
 
 function App() {
 
-  const [searchTitle, setSearchTitle] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedGenre, setSelectedGenre] = useState("");
-  const [selectedYear, setSelectedYear] = useState("");
-  const [selectedRating, setSelectedRating] =useState("");
-  const [selectedDirector, setSelectedDirector] = useState("");
-  const [selectedActor, setSelectedActor] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [selectedGenres, setSelectedGenres] = useState("");
+  const [selectedRuntimeSeconds, setSelectedRuntimeSeconds] = useState("");
+  const [selectedThemes, setSelectedThemes] = useState("");
+  const [selectedPublished, setSelectedPublished] = useState("");
+  const [selectedEditorialType, setSelectedEditorialType] = useState("");
+  const [selectedSynopsis, setSelectedSynopsis] = useState("");
 
 
   const filteredFilms = films.filter((film) => {
-  const matchesSearch = film.title.toLowerCase().includes(searchTerm.toLowerCase());
-  const matchesGenre = selectedGenre === "" || film.genre === selectedGenre;
-  const matchesYear = selectedYear === "" || film.year === Number(selectedYear);
-  const matchesRating = selectedRating === "" || film.rating === selectedRating;
-  const matchesDirector = selectedDirector === "" || film.director === selectedDirector;
-  const matchesActor = selectedActor === "" || film.actor === selectedActor;
-  const matchesLanguage = selectedLanguage === "" || film.language === selectedLanguage;
+    const matchesSearch = 
+      film.title.toLowerCase().includes(searchTerm.toLowerCase());
+  
+    const matchesGenre = 
+      selectedGenres === "" || 
+      film.genres.some((genre) => 
+        genre.toLowerCase().includes(selectedGenres.toLowerCase()));
+
+    const matchesRuntimeSeconds = 
+      selectedRuntimeSeconds === "" || 
+      (film.runtimeSeconds !== null &&
+      film.runtimeSeconds.toString().includes(selectedRuntimeSeconds));
+
+    const matchesThemes = 
+      selectedThemes === "" || 
+      film.themes.some((theme) => 
+      theme.toLowerCase().includes(selectedThemes.toLowerCase()));
+
+    const matchesPublished = 
+      selectedPublished === "" || 
+      film.published.toString().includes(selectedPublished);
+
+    const matchesEditorialType =
+      selectedEditorialType === "" ||  
+      film.editorialType.toLowerCase().includes(selectedEditorialType.toLowerCase());
+      
+    const matchesSynopsis = 
+      selectedSynopsis === "" || 
+      film.synopsis?.toLowerCase().includes(selectedSynopsis.toLowerCase());
 
 
-  return matchesSearch && matchesGenre && matchesYear && matchesRating && matchesDirector && matchesActor && matchesLanguage;
+  return matchesSearch && matchesGenre && matchesRuntimeSeconds && matchesThemes && matchesPublished && matchesEditorialType && matchesSynopsis;
 });
 
   return (
     <>
       <Header />
       <NavBar />
+
+
       <Bio /> 
-
-      <div className="filters">
-         <label>Film Title:</label>
-        <input type ="text" 
-          placeholder="Search by title..." 
-          value={searchTerm} 
-          onChange={(event) => setSearchTerm(event.target.value)} 
-          />
-        
-      <label>Director:</label>
-      <input type= "text"
-        placeholder="Search by director..." 
-        value={selectedDirector} 
-        onChange={(event) => setSelectedDirector(event.target.value)} 
-        />
-
-      <label>Actor:</label>
-      <input type= "text"
-        placeholder="Search by actor..." 
-        value={selectedActor} 
-        onChange={(event) => setSelectedActor(event.target.value)} 
-        />
-
-      <label>Language:</label>
-      <input type= "text"
-        placeholder="Search by language..." 
-        value={selectedLanguage} 
-        onChange={(event) => setSelectedLanguage(event.target.value)} 
-        />
-
-      <label>Year:</label>
-      <input type= "text"
-        placeholder="Search by year..." 
-        value={[selectedYear]} 
-        onChange={(event) => setSelectedYear(event.target.value)} 
-        />  
+      <section className="film-search">
+      <h2><span className="search-icon">🔍</span> Film Search</h2>
       
-      <label>Rating:</label>
-      <input type= "text"
-        placeholder="Search by rating..." 
-        value={selectedRating} 
-        onChange={(event) => setSelectedRating(event.target.value)}
+      <div className="filters">
+
+         <div className="filter-group">
+           <label htmlFor="film-title">Film Title:</label>
+           <input 
+             id="title"
+             type="text" 
+             placeholder="Search by title..." 
+             value={searchTerm} 
+             onChange={(event) => setSearchTerm(event.target.value)} 
+          />
+          </div>
+          
+          <div className="filter-group">
+           <label htmlFor="film-Genre">Genre:</label>
+           <input 
+             id="genre"
+             type= "text"
+             placeholder="Search by genre..." 
+             value={selectedGenres} 
+             onChange={(event) => setSelectedGenres(event.target.value)} 
+          />
+         </div>
+        
+        <div className="filter-group">
+          <label htmlFor="film-Themes">Themes:</label>
+          <input 
+            id="themes"
+            type= "text"
+            placeholder="Search by themes..." 
+            value={selectedThemes} 
+            onChange={(event) => setSelectedThemes(event.target.value)} 
+        />
+        </div>
+
+        <div className="filter-group">
+          <label htmlFor="editorial-type">Editorial Type:</label>
+          <input 
+            id="editorial-type"
+            type="text"
+            placeholder="Search by editorial type..." 
+            value={selectedEditorialType} 
+            onChange={(event) => setSelectedEditorialType(event.target.value)} 
+          />
+        </div>
+    
+
+       <div className="filter-group">
+        <label htmlFor="film-runtimeSeconds">Runtime (seconds):</label>
+        <input 
+          id="runtimeSeconds"
+          type= "text"
+          placeholder="Search by runtime..." 
+          value={selectedRuntimeSeconds} 
+          onChange={(event) => setSelectedRuntimeSeconds(event.target.value)} 
+        />  
+       </div>
+
+       <div className="filter-group">
+        <label htmlFor="film-Synopsis">Synopsis:</label>
+        <input 
+          id="synopsis"
+          type= "text"
+          placeholder="Search by synopsis..." 
+          value={selectedSynopsis} 
+          onChange={(event) => setSelectedSynopsis(event.target.value)}
         />
       </div>
 
+      <div className="filter-group">
+        <label htmlFor="film-published">Published:</label>
+          <input 
+            id="published"
+            type="text"
+            placeholder="Search by year..." 
+            value={selectedPublished} 
+            onChange={(event) => setSelectedPublished(event.target.value)}
+         />
+       </div>
+    </div>
+  </section>
     
-    {filteredFilms.map((film) => (
+    {searchTerm ||
+    selectedGenres ||
+    selectedRuntimeSeconds ||
+    selectedThemes ||
+    selectedPublished ||
+    selectedEditorialType ||
+    selectedSynopsis ? filteredFilms.length > 0 ? filteredFilms.map((film) => (
       <Films 
-      key={film.title}
+      key={film.id}
       FilmTitle={film.title}
-      FilmGenre={film.genre}
+      FilmGenres={film.genres}
       FilmYear={film.year}
-      FilmRating={film.rating}
-      FilmDirector={film.director}
-      FilmActor={film.actor}
-      FilmLanguage={film.language}
-      filmDescription={film.synopsis}
+      FilmThemes={film.themes}
+      FilmRuntimeSeconds={film.runtimeSeconds}
+      FilmPublished={film.published}
+      FilmEditorialType={film.editorialType}
+      FilmSynopsis={film.synopsis}
       />  
-    ))};
+    ))
+   : 
+    <p className="no-results">No films match your search criteria.</p>
+  
+ : (
+  <p>Use the search fields above to find a film.</p>
+)}
     
 
 
